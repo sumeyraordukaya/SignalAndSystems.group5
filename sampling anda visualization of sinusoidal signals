@@ -1,0 +1,49 @@
+import numpy as np
+import matplotlib.pyplot as plt
+f0 = 96 
+f1 = f0
+f2 = f0 / 2
+f3 = 10 * f0
+
+dt = 1 / fs
+T_plot_max = 3 * (1 / f2) 
+t = np.arange(0, T_plot_max, dt)
+
+x1 = np.sin(2 * np.pi * f1 * t)
+x2 = np.sin(2 * np.pi * f2 * t)
+x3 = np.sin(2 * np.pi * f3 * t)
+x_sum = x1 + x2 + x3
+
+fig, axs = plt.subplots(3, 1, figsize=(10, 8))
+fig.suptitle(f'Task 1: Sinüzoidal Sinyallerin Görselleştirilmesi (f0 = {f0} Hz)')
+
+axs[0].plot(t, x1, 'b')
+axs[0].set_title(f'Sinyal 1 (f1 = {f1} Hz)')
+axs[0].set_xlim([0, 3/f1]) # Tam 3 periyot [cite: 27]
+axs[0].grid(True)
+
+axs[1].plot(t, x2, 'g')
+axs[1].set_title(f'Sinyal 2 (f2 = {f2} Hz)')
+axs[1].set_xlim([0, 3/f2]) # Tam 3 periyot
+axs[1].grid(True)
+
+axs[2].plot(t, x3, 'r')
+axs[2].set_title(f'Sinyal 3 (f3 = {f3} Hz)')
+axs[2].set_xlim([0, 3/f3]) # Tam 3 periyot
+axs[2].grid(True)
+
+for ax in axs:
+    ax.set_ylabel('Genlik')
+
+plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+
+plt.figure(figsize=(10, 4))
+plt.plot(t, x_sum, 'k')
+plt.title('Üç Sinyalin Toplamı (x1 + x2 + x3)')
+plt.xlabel('Zaman (s)')
+plt.ylabel('Genlik')
+plt.xlim([0, T_plot_max])
+
+
+plt.grid(True)
+plt.show()
